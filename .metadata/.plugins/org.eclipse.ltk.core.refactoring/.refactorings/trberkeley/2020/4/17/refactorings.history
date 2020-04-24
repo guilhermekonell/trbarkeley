@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 3 elements to &apos;trberkeley/src/trberkeley&apos;&#x0D;&#x0A;- Original project: &apos;trberkeley&apos;&#x0D;&#x0A;- Destination element: &apos;trberkeley/src/trberkeley&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     Relogio.java&#x0D;&#x0A;     Ajuste.java&#x0D;&#x0A;     TrBerkeley.java&#x0D;&#x0A;- Update references to refactored element" description="Move compilation units" destination="/src&lt;trberkeley" element1="/src&lt;{Relogio.java" element2="/src&lt;{Ajuste.java" element3="/src&lt;{TrBerkeley.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1587771119732" units="3" version="1.0"/>
+</session>

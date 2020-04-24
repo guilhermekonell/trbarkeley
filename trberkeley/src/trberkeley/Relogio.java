@@ -1,0 +1,25 @@
+package trberkeley;
+
+public class Relogio {
+    
+    String hora;
+    int diferenca = 0;
+    
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public int getDiferenca() {
+        return diferenca;
+    }
+
+    public void setDiferenca(int diferenca) {
+        this.diferenca = diferenca;
+    }
+     
+    
+}

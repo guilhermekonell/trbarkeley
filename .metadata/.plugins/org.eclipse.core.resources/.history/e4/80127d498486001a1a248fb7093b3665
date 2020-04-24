@@ -1,0 +1,79 @@
+package trberkeley;
+
+import java.text.DecimalFormat;
+
+public class Ajuste {
+    
+    int somaDiferenca = 0;    
+    int media = 0;
+
+    public int getSomaDiferenca() {
+        return somaDiferenca;
+    }
+
+    public void setSomaDiferenca(int somaDiferenca) {
+        this.somaDiferenca = somaDiferenca;
+    }
+    
+    public static int hour2minutes(String horaCompleta) {
+        String[] partes = horaCompleta.split(":");
+
+        int hour = Integer.parseInt(partes[0]);
+        int min = Integer.parseInt(partes[1]);
+
+        return (hour * 60) + min;
+    }
+    
+    public String minutes2hour(int minutosCompletos) {
+        int inteira = minutosCompletos / 60;
+        int resto = minutosCompletos % 60;
+        
+        DecimalFormat formatador = new DecimalFormat("00");
+        
+        return (formatador.format(inteira) + ":" + formatador.format(resto));              
+    }
+
+    public void imprimirHora(Relogio servidor, Relogio clientes[]) {
+        System.out.println("---------HORAS CONVERTIDAS---------");
+        System.out.println("SERVIDOR: "+servidor.getHora());
+        
+        for (int i = 0; i < clientes.length; i++) {
+            System.out.println("CLIENTE "+i+" : "+clientes[i].getHora());
+        }
+    }
+    
+    public void sincronizar(Relogio servidor, Relogio clientes[]) {
+        
+        //Criando espaço para guardar as horas convertidas em minutos para calculo
+        int convServ = hour2minutes(servidor.hora);
+        int[] converte = new int[3];
+        
+        //Covertendo as horas dos cliente p/minutos
+        //Inserindo as diferenças com o servidor
+        //Somando as diferenças para depois calcular media
+        for (int i = 0; i < converte.length; i++) {
+            converte[i] = hour2minutes(clientes[i].hora);
+            clientes[i].setDiferenca(converte[i]-convServ);
+            somaDiferenca += clientes[i].getDiferenca();
+        }
+        
+        //Calculando a media
+        media = somaDiferenca/(clientes.length + 1);
+        
+        //Inertendo os sinais da diferenca
+        //Guardando no vetor converte os novos minutos calculados
+        for (int i = 0; i < converte.length; i++) {
+            clientes[i].setDiferenca(clientes[i].diferenca*(-1));
+            converte[i] = converte[i]+(clientes[i].diferenca+media);
+        }
+        //Guardando os novos minutos do servidor
+        convServ = convServ+media;
+        
+        //Convertendo novamente para String
+        for (int i = 0; i < converte.length; i++) {
+            clientes[i].setHora(minutes2hour(converte[i]));            
+        }
+        servidor.setHora(minutes2hour(convServ));
+    }
+    
+}
